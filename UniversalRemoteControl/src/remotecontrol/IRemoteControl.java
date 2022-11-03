@@ -12,9 +12,9 @@ public interface IRemoteControl {
      * The action button was pressed.
      * Depending on its status, it will execute an activate or deactivate action.
      *
-     * @param no The number of the button.
+     * @param index The number of the button.
      */
-    public void actionButtonPressed(int no);
+    public void actionButtonPressed(int index);
 
     /**
      * The undo button was pressed.

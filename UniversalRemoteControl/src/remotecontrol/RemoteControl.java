@@ -29,21 +29,21 @@ public class RemoteControl implements IRemoteControl {
 		 * The action button was pressed.
 		 * Depending on its status, it will execute an activate or deactivate action.
 		 *
-		 * @param no The number of the button.
+		 * @param index The number of the button.
 		 */
-		public void actionButtonPressed(int no) {
+		public void actionButtonPressed(int index) {
 			// Execute action
-			if (buttonStatus[no] == false) {
-				System.out.println("Button activated: " + no);
-				pairedActions[no].execute();   // TODO: Execute activation action
-				undoButtonOrder.push(no);    // TODO: Configure undo (deactivation) action;
+			if (buttonStatus[index] == false) {
+				System.out.println("Button activated: " + index);
+				pairedActions[index].execute();   // TODO: Execute activation action
+				undoButtonOrder.push(index);    // TODO: Configure undo (deactivation) action;
 			} else {
-				System.out.println("Button deactivated: " + no);
-				pairedActions[no].undo(); // TODO: Execute deactivation action
-				undoButtonOrder.push(no); // TODO: Configure undo (activation) action
+				System.out.println("Button deactivated: " + index);
+				pairedActions[index].undo(); // TODO: Execute deactivation action
+				undoButtonOrder.push(index); // TODO: Configure undo (activation) action
 			}
 			// Invert button status
-			buttonStatus[no] = !buttonStatus[no];
+			buttonStatus[index] = !buttonStatus[index];
 		}
 
 		/**
@@ -53,7 +53,7 @@ public class RemoteControl implements IRemoteControl {
 		public void undoButtonPressed() {
 			// Execute undo action
 			System.out.println("Undo button pressed");
-			int no = undoButtonOrder.pop();
-			actionButtonPressed(no); // TODO: Execute undo action
+			int index = undoButtonOrder.pop();
+			actionButtonPressed(index); // TODO: Execute undo action
 		}
 }
