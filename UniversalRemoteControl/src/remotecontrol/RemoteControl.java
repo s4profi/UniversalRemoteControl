@@ -10,19 +10,24 @@ public class RemoteControl implements IRemoteControl {
 		public final static int NO_OF_ACTION_BUTTONS = 3;
 
 		private boolean[] buttonStatus;
-		private ICommand[] pairedActions;  // TODO: Data structures for the actions
+		private ICommand[] negativeActions;  // TODO: Data structures for the actions
+		private ICommand[] positiveActions;  // TODO: Data structures for the actions
 
 		private Stack<Integer> undoButtonOrder;    // Added for undo action
 
 
 	public RemoteControl() {
-			buttonStatus = new boolean[NO_OF_ACTION_BUTTONS];
-			pairedActions = new ICommand[NO_OF_ACTION_BUTTONS];  // TODO: Initialize data structures for the actions
-			undoButtonOrder = new Stack<Integer>();
+		buttonStatus = new boolean[NO_OF_ACTION_BUTTONS];
+		negativeActions = new ICommand[NO_OF_ACTION_BUTTONS];  // TODO: Initialize data structures for the actions
+		positiveActions = new ICommand[NO_OF_ACTION_BUTTONS];  // TODO: Initialize data structures for the actions
+
+		undoButtonOrder = new Stack<Integer>();
 	}
 
-		public void configureActionButton(ICommand[] pairedActions){	// TODO: Implement method for configuration of action buttons
-			this.pairedActions = pairedActions;
+		public void configureActionButton(ICommand[] negativeActions, ICommand[] positiveActions){	// TODO: Implement method for configuration of action buttons
+
+		this.negativeActions = negativeActions;
+		this.positiveActions = positiveActions;
 		}
 
 		/**
@@ -35,11 +40,11 @@ public class RemoteControl implements IRemoteControl {
 			// Execute action
 			if (buttonStatus[index] == false) {
 				System.out.println("Button activated: " + index);
-				pairedActions[index].execute();   // TODO: Execute activation action
+				positiveActions[index].execute();   // TODO: Execute activation action
 				undoButtonOrder.push(index);    // TODO: Configure undo (deactivation) action;
 			} else {
 				System.out.println("Button deactivated: " + index);
-				pairedActions[index].undo(); // TODO: Execute deactivation action
+				negativeActions[index].execute(); // TODO: Execute deactivation action
 				undoButtonOrder.push(index); // TODO: Configure undo (activation) action
 			}
 			// Invert button status

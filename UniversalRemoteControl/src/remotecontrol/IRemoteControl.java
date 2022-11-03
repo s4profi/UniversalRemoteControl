@@ -6,7 +6,7 @@ package remotecontrol;
 public interface IRemoteControl {
 
     // TODO: Method for configuration of action buttons
-    public void configureActionButton(ICommand[] pairedAction);
+    public void configureActionButton(ICommand[] negativeActions, ICommand[] positiveActions);
 
     /**
      * The action button was pressed.
